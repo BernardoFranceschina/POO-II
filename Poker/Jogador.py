@@ -3,8 +3,15 @@ class Jogador:
         self._numeroJogador = numeroJogador
         self._deck = []
         self._fichas = 1000
+        self._qntApostada = 0
 
-    def setCarteira(self, fichas):
+    def setQntApostada(self, qntApostada):
+        self._qntApostada = qntApostada
+
+    def getQntApostada(self):
+        return self._qntApostada
+
+    def setFichas(self, fichas):
         self._fichas = fichas
 
     def getFichas(self):
