@@ -1,35 +1,58 @@
-import random
-from Jogador import Jogador
+from Deck import *
+from Jogador import *
+
+jogadores = []
+jogadorSmall = 1
+jogadorBig = 2
+smallBet = 5
+minimalBet = (smallBet * 2)
+# rodada = 1
+
+deck = Deck()
+apostas = []
+
+
+def bet():
+    for rodada in range(1, 3):
+        for jogador in jogadores:
+            while 
+            print('Rodada ', rodada, '- Vez do jogador numero', jogador.getNumeroJogador())
+            opcaoStr = ''
+            if rodada == 1:
+                if jogador.getNumeroJogador() == jogadorSmall:
+                    opcaoStr = '1) Fazer SMALL BET'
+                if jogador.getNumeroJogador() == jogadorBig:
+                    opcaoStr = '1) Fazer BIG BET'
+            opcao = int(input(opcaoStr))
+
+def validaJogadoresComFicha():
+    for jogador in jogadores:
+        if jogador.getFichas() < minimalBet:
+            print('Jogador ', jogador.getNumeroJogador(), 'não possui fichas suficientes para continuar jogando!')
+            # jogadores[jogador.getNumeroJogador()-1] = None
+
+
+def play():
+    validaJogadoresComFicha()
+    distribuiCartas()
+    bet()
+
+
+def distribuiCartas():
+    deckEmbaralhado = deck.embaralhar()
+    for jogador in jogadores:
+        cartasDoJogador = deckEmbaralhado[:2]
+        deckEmbaralhado = deckEmbaralhado[2:]
+        jogador.setCartas(cartasDoJogador)
+
 
 def main():
-    cartasNumeros = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-    cartasNaipes = ['O', 'P', 'C', 'E']
-
-    # Junta os arrays com naipes e numero para formas as cartas
-    cartas = []
-    for numero in cartasNumeros:
-        for naipe in cartasNaipes:
-            cartas.append(numero + naipe)
-
-    # Embaralha o deck de cartas
-    random.shuffle(cartas)
-    cartasEmbaralhadas = cartas
-    qntCartas = len(cartasEmbaralhadas)
-
-    jogadoresNum = int(input('Insira o numero de jogadores'))
-    cartasPorJogador = int((qntCartas / jogadoresNum))
-    cartasQueSobraram = qntCartas - (int(cartasPorJogador) * jogadoresNum)
-
-    # Cria os jogadores
-    jogadores = []
+    jogadoresNum = int(input('Insira o numero de jogadores 2 a 8'))
     for jogador in range(jogadoresNum):
-        cartasDoJogador = cartasEmbaralhadas[:cartasPorJogador]
-        cartasEmbaralhadas = cartasEmbaralhadas[cartasPorJogador:]
-        jogadores.append(Jogador(cartasDoJogador, jogador+1))
+        jogadores.append(Jogador(jogador + 1))
 
-    for jogador in jogadores:
-        print('Jogador', jogador.getNumeroJogador(), 'possui as cartas:', jogador.getCartas())
+    play()
 
-    print('Cartas que sobraram:', cartasQueSobraram, cartasEmbaralhadas)
 
-main()
+if __name__ == '__main__':
+    main()
