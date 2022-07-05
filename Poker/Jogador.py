@@ -2,10 +2,13 @@ class Jogador:
     def __init__(self, numeroJogador):
         self._numeroJogador = numeroJogador
         self._deck = []
-        self._carteira = 5000
+        self._fichas = 1000
 
-    def setValor(self, carteira):
-        self._carteira = carteira
+    def setCarteira(self, fichas):
+        self._fichas = fichas
+
+    def getFichas(self):
+        return self._fichas
 
     def setCartas(self, deck):
         self._deck = deck
