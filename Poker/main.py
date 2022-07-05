@@ -5,25 +5,32 @@ jogadores = []
 jogadorSmall = 1
 jogadorBig = 2
 smallBet = 5
-minimalBet = (smallBet * 2)
-# rodada = 1
+minimalBet = 10
 
 deck = Deck()
-apostas = []
+deckEmbaralhado = deck.embaralhar()
+cartasMesa = []
 
+
+def menu(jogador, rodada):
+    opcaoLim = 5
+    opcaoStr =
+
+    opcao = 0
+    while opcao < 1 or opcao > opcaoLim:
+        opcao = int(input(opcaoStr))
+
+    return opcao
 
 def bet():
-    for rodada in range(1, 3):
+    for rodada in range(1, 4):
         for jogador in jogadores:
-            while 
             print('Rodada ', rodada, '- Vez do jogador numero', jogador.getNumeroJogador())
-            opcaoStr = ''
-            if rodada == 1:
-                if jogador.getNumeroJogador() == jogadorSmall:
-                    opcaoStr = '1) Fazer SMALL BET'
-                if jogador.getNumeroJogador() == jogadorBig:
-                    opcaoStr = '1) Fazer BIG BET'
-            opcao = int(input(opcaoStr))
+            opcao = menu(jogador.getNumeroJogador(), rodada)
+
+        cartasMesa.append(deckEmbaralhado.pop())
+        print(cartasMesa)
+
 
 def validaJogadoresComFicha():
     for jogador in jogadores:
@@ -39,7 +46,7 @@ def play():
 
 
 def distribuiCartas():
-    deckEmbaralhado = deck.embaralhar()
+    global deckEmbaralhado
     for jogador in jogadores:
         cartasDoJogador = deckEmbaralhado[:2]
         deckEmbaralhado = deckEmbaralhado[2:]
@@ -47,7 +54,9 @@ def distribuiCartas():
 
 
 def main():
-    jogadoresNum = int(input('Insira o numero de jogadores 2 a 8'))
+    jogadoresNum = 0
+    while jogadoresNum < 2 or jogadoresNum > 8:
+        jogadoresNum = int(input('Insira o numero de jogadores 2 a 8\n'))
     for jogador in range(jogadoresNum):
         jogadores.append(Jogador(jogador + 1))
 
