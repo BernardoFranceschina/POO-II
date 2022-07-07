@@ -5,8 +5,11 @@ class Jogador:
         self._fichas = 1000
         self._qntApostada = 0
 
-    def setQntApostada(self, qntApostada):
-        self._qntApostada = qntApostada
+    def setQntApostada(self, qntApostada=0):
+        if qntApostada > 0:
+            self._qntApostada = qntApostada
+        else:
+            self._qntApostada = 0
 
     def getQntApostada(self):
         return self._qntApostada
@@ -22,6 +25,12 @@ class Jogador:
 
     def getCartas(self):
         return self._deck
+
+    def printCartas(self):
+        deck = []
+        for i in self._deck:
+            deck.append(i.getCartas())
+        return deck
 
     def getNumeroJogador(self):
         return self._numeroJogador

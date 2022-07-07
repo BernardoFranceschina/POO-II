@@ -1,36 +1,34 @@
 from Deck import *
 from Jogador import *
+from Poker import *
 
 jogadores = []
-jogadorSmall = 1
-jogadorBig = 2
-smallBet = 5
 minimalBet = 10
 
 deck = Deck()
+poker = Poker()
 deckEmbaralhado = deck.embaralhar()
 cartasMesa = []
 
 
-def menu(jogador, rodada):
-    opcaoLim = 5
-    opcaoStr =
-
-    opcao = 0
-    while opcao < 1 or opcao > opcaoLim:
-        opcao = int(input(opcaoStr))
-
-    return opcao
-
-def bet():
-    for rodada in range(1, 4):
+def rodadas():
+    for rodada in range(1, 5):
         for jogador in jogadores:
-            print('Rodada ', rodada, '- Vez do jogador numero', jogador.getNumeroJogador())
-            opcao = menu(jogador.getNumeroJogador(), rodada)
+            print('\n\nRodada ', rodada, '- Vez do jogador numero', jogador.getNumeroJogador())
+            print('Cartas:', jogador.printCartas())
+            if rodada >= 4:
+                print(poker.onePair(jogador.getCartas(), cartasMesa))
 
-        cartasMesa.append(deckEmbaralhado.pop())
-        print(cartasMesa)
+        if rodada < 4:
+            cartasMesa.append(deckEmbaralhado.pop())
+        print('\n'*8)
+        print('Cartas da mesa:')
+        for i in cartasMesa:
+            print(i.getCartas(), end=' ')
 
+    print('\n\nFim das rodadas')
+
+    print('Vencedor:')
 
 def validaJogadoresComFicha():
     for jogador in jogadores:
@@ -39,14 +37,15 @@ def validaJogadoresComFicha():
             # jogadores[jogador.getNumeroJogador()-1] = None
 
 
-def play():
+def iniciaJogo():
     validaJogadoresComFicha()
     distribuiCartas()
-    bet()
+    rodadas()
 
 
 def distribuiCartas():
-    global deckEmbaralhado
+    cartasMesa = []
+    deckEmbaralhado = deck.embaralhar()
     for jogador in jogadores:
         cartasDoJogador = deckEmbaralhado[:2]
         deckEmbaralhado = deckEmbaralhado[2:]
@@ -60,7 +59,7 @@ def main():
     for jogador in range(jogadoresNum):
         jogadores.append(Jogador(jogador + 1))
 
-    play()
+    iniciaJogo()
 
 
 if __name__ == '__main__':
