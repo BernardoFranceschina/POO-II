@@ -7,7 +7,8 @@ class Jogador:
 
     def setQntApostada(self, qntApostada=0):
         if qntApostada > 0:
-            self._qntApostada = qntApostada
+            self._qntApostada = self._qntApostada + qntApostada
+            self.setFichas(self.getFichas() - qntApostada)
         else:
             self._qntApostada = 0
 

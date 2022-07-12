@@ -10,6 +10,14 @@ class Cards:
         return self._naipe
 
     def getNumero(self):
+        if self._numero == 'J':
+            return '11'
+        if self._numero == 'Q':
+            return '12'
+        if self._numero == 'K':
+            return '13'
+        if self._numero == 'A':
+            return '14'
         return self._numero
 
     def getCartas(self):
